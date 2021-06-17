@@ -1,3 +1,4 @@
 /image/debug.log
 /runs/train/
 /Yolov5Train/Dockerfile
+/runs/
