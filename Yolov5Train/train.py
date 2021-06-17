@@ -145,6 +145,7 @@ def train(hyp, opt, device, tb_writer=None, wandb=None):
 
     # Resume
     start_epoch, best_fitness = 0, 0.0
+
     if pretrained:
         # Optimizer
         if ckpt['optimizer'] is not None:

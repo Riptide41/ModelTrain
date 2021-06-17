@@ -140,11 +140,11 @@ class MainWindow(QMainWindow):
         if self.train_setting_window.ui.lineEdit_weight.text():
             opt.weights = self.train_setting_window.ui.lineEdit_weight.text()
         if self.train_setting_window.ui.lineEdit_epoch.text():
-            opt.epochs = self.train_setting_window.ui.lineEdit_epoch.text()
+            opt.epochs = int(self.train_setting_window.ui.lineEdit_epoch.text())
         if self.train_setting_window.ui.lineEdit_batch_size.text():
-            opt.batch_size = self.train_setting_window.ui.lineEdit_batch_size.text()
+            opt.batch_size = int(self.train_setting_window.ui.lineEdit_batch_size.text())
         if self.train_setting_window.ui.lineEdit_img_size.text():
-            opt.img_size = self.train_setting_window.ui.lineEdit_img_size.text()
+            opt.img_size = [int(self.train_setting_window.ui.lineEdit_img_size.text())]
         if self.train_setting_window.ui.lineEdit_device.text():
             opt.device = self.train_setting_window.ui.lineEdit_device.text()
 
