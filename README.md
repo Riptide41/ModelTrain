@@ -19,7 +19,7 @@ Then click the "Set Category" button in the main interface of the software, ente
 
 Click the "Open LabelImg" button to open the LabelImg program. The LabelImg software can be used to label pictures conveniently and quickly. After entering the program, click "Open DIr" to open the folder where the data set is located. After setting the save format to Yolo, you can start labeling. If there are problems in the use, please refer to the [LabelImg page](https://github.com/tzutalin/labelImg).
 
-<img src="C:\Users\AIMTTEST\Project\TrainUI\image\3.jpg" alt="image" style="zoom:80%;" />
+<img src="image\3.jpg" alt="image" style="zoom:80%;" />
 
 ## 2.Prepare dataset
 
