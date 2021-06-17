@@ -25,7 +25,7 @@ Click the "Open LabelImg" button to open the LabelImg program. The LabelImg soft
 
 After all the pictures are labeled, click the "select fold" button in "Setp2" to select the folder of the dataset, and the software will detect the total number of pictures in the folder. Then, the proportion of train&valid set and test set is modified by "TrainVal percent", and the proportion of valid set in train&valid set is modified by ”Val percent".After modification, click the "split" button to split the train set, valid set and test set, and four files will be generated under the data set path, namely "train.txt", "val.txt", "test.txt", "classes.txt".
 
-<img src="C:\Users\AIMTTEST\Project\TrainUI\image\4.jpg" alt="4" style="zoom:80%;" />
+<img src="image\4.jpg" alt="4" style="zoom:80%;" />
 
 
 
@@ -33,11 +33,11 @@ After all the pictures are labeled, click the "select fold" button in "Setp2" to
 
 Fill in the four file paths generated in the previous step in turn, then click the "setting" button to modify the parameters of the model training.
 
-<img src="C:\Users\AIMTTEST\Project\TrainUI\image\5.jpg" alt="5" style="zoom:80%;" />
+<img src="image\5.jpg" alt="5" style="zoom:80%;" />
 
 "Yolov5s" model will be used for training by default, if you need to use yolov5m / 5L / 5x model, you can go to the [yolov5 project](https://github.com/ultralytics/yolov5) page to download the pre training model, and then modify the weight parameter to the download model path. 
 
-<img src="C:\Users\AIMTTEST\Project\TrainUI\image\6.jpg" alt="image" style="zoom:67%;" />
+<img src="image\6.jpg" alt="image" style="zoom:67%;" />
 
 Click the “Change Hyperparameters” button to open the Hyperparameters modification page.
 
@@ -45,7 +45,7 @@ If you don't understand the meaning of the parameter, you can point the mouse at
 
 After setting parameters, click training to start training, and the training process will be printed below. If the training needs to stop, just close the program.
 
-<img src="C:\Users\AIMTTEST\Project\TrainUI\image\7.jpg" style="zoom:80%;" />
+<img src="image\7.jpg" style="zoom:80%;" />
 
 If you need to train the model under the same dataset, you just need to perform the step3.
 
