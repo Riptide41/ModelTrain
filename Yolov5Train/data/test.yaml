@@ -1,0 +1,13 @@
+train: C:/Users/AIMTTEST/Desktop/dataset_test/train.txt
+test: C:/Users/AIMTTEST/Desktop/dataset_test/test.txt
+val: C:/Users/AIMTTEST/Desktop/dataset_test/val.txt
+classes:
+- SealCover_R
+- Seal_R
+- ShieldSleeve_R
+- ShieldCrimpFerrule_R
+- ShieldCrimpFerrule_L
+- Shield Sleeve_L
+- SealCover_L
+- Seal_L
+nc: 8

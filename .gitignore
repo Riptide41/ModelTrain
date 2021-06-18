@@ -2,3 +2,4 @@
 /runs/train/
 /Yolov5Train/Dockerfile
 /runs/
+/Yolov5Train/data/images/
