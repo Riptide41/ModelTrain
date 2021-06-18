@@ -101,8 +101,8 @@ class MainWindow(QMainWindow):
         self.init_event()
 
         # redirect print output
-        sys.stdout = Stream(newText=self.onUpdateText)
-        sys.stderr = Stream(newText=self.onUpdateText)
+        # sys.stdout = Stream(newText=self.onUpdateText)
+        # sys.stderr = Stream(newText=self.onUpdateText)
 
     def onUpdateText(self, text):
         cursor = self.ui.textEdit.textCursor()
@@ -174,7 +174,7 @@ class MainWindow(QMainWindow):
         print(opt)
 
 
-        t = threading.Thread(target=train.train_model, args=(opt,))
+        t = threading.Thread(target=self.train_thread, args=(opt,))
         t.setDaemon(True)
         t.start()
         # train.train_model(opt)
@@ -184,7 +184,7 @@ class MainWindow(QMainWindow):
         # exec(".\LabelImg\labelImg.py")
 
     def train_thread(self, opt):
-        self.ui.btn_train.setEnable(False)
+        self.ui.btn_train.setEnabled(False)
         try:
             sys.path.append('Yolov5Train')
             from Yolov5Train import train
@@ -193,7 +193,7 @@ class MainWindow(QMainWindow):
         except:
             QMessageBox.critical(self, "Train Failure", "Please check parameter and setting.")
         finally:
-            self.ui.btn_train.setEnable(True)
+            self.ui.btn_train.setEnabled(True)
 
     def select_classes_file_path(self):
         path = QFileDialog.getOpenFileName(
