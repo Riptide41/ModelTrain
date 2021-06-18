@@ -12,6 +12,7 @@ import threading
 import MainWindowUI
 import SetCategoryUI
 import TrainSettingUI
+import SettingHyperparametersUI
 import glob
 import yaml
 
@@ -51,13 +52,26 @@ class SetCategoryWindow(QWidget):
         super().show()
 
 
+class SettingHyperparametersWindow(QWidget):
+    def __init__(self):
+        super(SettingHyperparametersWindow, self).__init__()
+        self.ui = SettingHyperparametersUI.Ui_Form()
+        self.ui.setupUi(self)
+        self.setWindowIcon(QIcon("ICON/window.ico"))
+        self.setWindowModality(Qt.ApplicationModal)
+        self.ui.btn_ok.clicked.connect(self.close)
+
 class TrainSettingWindow(QWidget):
     def __init__(self):
         super(TrainSettingWindow, self).__init__()
         self.ui = TrainSettingUI.Ui_Form()
         self.ui.setupUi(self)
         self.setWindowIcon(QIcon("ICON/window.ico"))
+        self.hyper_setting_window = SettingHyperparametersWindow()
         self.ui.btn_select_weight.clicked.connect(self.select_weights)
+        self.ui.btn_set_hyperparameters.clicked.connect(self.hyper_setting_window.show)
+        self.ui.btn_ok.clicked.connect(self.close)
+        self.setWindowModality(Qt.ApplicationModal)
 
     def select_weights(self):
         path = QFileDialog.getOpenFileName(
@@ -65,6 +79,7 @@ class TrainSettingWindow(QWidget):
             '', "Model Files (*.pt)")[0]
         if path:
             self.ui.lineEdit_weight.setText(path)
+
 
 # redirect stdout to textEdit
 class Stream(QtCore.QObject):
@@ -97,7 +112,7 @@ class MainWindow(QMainWindow):
         self.ui.textEdit.ensureCursorVisible()
 
     def init_event(self):
-        self.ui.btn_set_category.clicked.connect(self.set_category)
+        self.ui.btn_set_category.clicked.connect(self.set_category_window.show)
         self.ui.btn_select_dataset.clicked.connect(self.select_dataset_path)
         self.ui.btn_openlabelimg.clicked.connect(self.open_labelimg)
         self.ui.btn_split.clicked.connect(self.split_dataset)
@@ -108,7 +123,7 @@ class MainWindow(QMainWindow):
         self.ui.btn_select_classes_file.clicked.connect(self.select_classes_file_path)
 
         self.ui.btn_train.clicked.connect(self.train)
-        self.ui.btn_train_setting.clicked.connect(self.train_setting)
+        self.ui.btn_train_setting.clicked.connect(self.train_setting_window.show)
 
     def open_labelimg(self):
         t = threading.Thread(target=os.system("python ./LabelImg/labelImg.py"))
@@ -157,8 +172,7 @@ class MainWindow(QMainWindow):
         opt.resume = True if self.train_setting_window.ui.checkBox_resume.checkState() else False
         opt.rect = True if self.train_setting_window.ui.checkBox_rect.checkState() else False
         print(opt)
-        sys.path.append('Yolov5Train')
-        from Yolov5Train import train
+
 
         t = threading.Thread(target=train.train_model, args=(opt,))
         t.setDaemon(True)
@@ -169,8 +183,17 @@ class MainWindow(QMainWindow):
         # os.chdir("./LabelImg")
         # exec(".\LabelImg\labelImg.py")
 
-    def train_setting(self):
-        self.train_setting_window.show()
+    def train_thread(self, opt):
+        self.ui.btn_train.setEnable(False)
+        try:
+            sys.path.append('Yolov5Train')
+            from Yolov5Train import train
+
+            train.train_model(opt)
+        except:
+            QMessageBox.critical(self, "Train Failure", "Please check parameter and setting.")
+        finally:
+            self.ui.btn_train.setEnable(True)
 
     def select_classes_file_path(self):
         path = QFileDialog.getOpenFileName(
@@ -204,13 +227,6 @@ class MainWindow(QMainWindow):
         if path:
             self.ui.le_test_path.setText(path)
 
-    def set_category(self):
-        if self.set_category_window.isHidden():
-            print("show")
-            self.set_category_window.show()
-        else:
-            QMessageBox.critical(self, 'Error',
-                                 "Window is already opened.")
 
     def select_dataset_path(self):
         split_dataset_path = QFileDialog.getExistingDirectory()
