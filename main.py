@@ -1,18 +1,14 @@
 import sys
 from argparse import Namespace
 
-import PyQt5
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QWidget, QMessageBox
 from PyQt5.QtCore import Qt
 import itertools
 import os
 import threading
-import MainWindowUI
-import SetCategoryUI
-import TrainSettingUI
-import SettingHyperparametersUI
+from UI import SetCategoryUI, TrainSettingUI, SettingHyperparametersUI, MainWindowUI
 import glob
 import yaml
 
