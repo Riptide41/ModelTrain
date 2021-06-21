@@ -101,8 +101,8 @@ class MainWindow(QMainWindow):
         self.init_event()
 
         # redirect print output
-        # sys.stdout = Stream(newText=self.onUpdateText)
-        # sys.stderr = Stream(newText=self.onUpdateText)
+        sys.stdout = Stream(newText=self.onUpdateText)
+        sys.stderr = Stream(newText=self.onUpdateText)
 
     def onUpdateText(self, text):
         cursor = self.ui.textEdit.textCursor()
