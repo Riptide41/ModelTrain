@@ -12,7 +12,7 @@ ENV PATH /env/bin:$PATH
 
 RUN apt-get update && apt-get install -y python-opencv
 
-# Copy the application's requirements.txt and run pip to install all
+# Copy the application's yolo_requirements.txt and run pip to install all
 # dependencies into the virtualenv.
 ADD requirements.txt /app/requirements.txt
 RUN pip install -r /app/requirements.txt
@@ -21,5 +21,5 @@ RUN pip install -r /app/requirements.txt
 ADD . /app
 
 # Run a WSGI server to serve the application. gunicorn must be declared as
-# a dependency in requirements.txt.
+# a dependency in yolo_requirements.txt.
 CMD gunicorn -b :$PORT main:app
