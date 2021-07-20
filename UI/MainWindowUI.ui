@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>642</width>
-    <height>584</height>
+    <height>611</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -68,6 +68,9 @@
             <pointsize>11</pointsize>
            </font>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Proportion of train and val dataset, the ramaining part is divided into test dataset&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
            <string>TrainVal Percent:</string>
           </property>
@@ -115,6 +118,9 @@
            <font>
             <pointsize>11</pointsize>
            </font>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Porportion of val dataset in trainval dataset, the remaining part is divided into train dataset&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
            <string>Val Percent:</string>
