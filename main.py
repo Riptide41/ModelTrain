@@ -169,7 +169,7 @@ class MainWindow(QMainWindow):
         opt.rect = True if self.train_setting_window.ui.checkBox_rect.checkState() else False
         print(opt)
 
-
+        # self.train_thread(opt)
         t = threading.Thread(target=self.train_thread, args=(opt,))
         t.setDaemon(True)
         t.start()
@@ -186,8 +186,9 @@ class MainWindow(QMainWindow):
             from Yolov5Train import train
 
             train.train_model(opt)
-        except:
-            QMessageBox.critical(self, "Train Failure", "Please check parameter and setting.")
+        except Exception as e:
+            print(e)
+            QMessageBox.critical(self, "Train Failure", "check paraPlease meter and setting.")
         finally:
             self.ui.btn_train.setEnabled(True)
 
@@ -246,15 +247,23 @@ class MainWindow(QMainWindow):
         from sklearn.model_selection import train_test_split
         trainval_files, test_files = train_test_split(image_ids, test_size=1 - train_val_percent, random_state=55)
         train_files, val_files = train_test_split(trainval_files, test_size=val_percent, random_state=55)
-        with open(dataset_path + '/test.txt', 'w') as f:
-            for i in test_files:
-                f.write(i + "\n")
-        with open(dataset_path + '/train.txt', 'w') as f:
-            for i in train_files:
-                f.write(i + "\n")
-        with open(dataset_path + '/val.txt', 'w') as f:
-            for i in val_files:
-                f.write(i + "\n")
+        try:
+            with open(dataset_path + '/test.txt', 'w') as f:
+                for i in test_files:
+                    f.write(i + "\n")
+            self.ui.le_test_path.setText(dataset_path + '/test.txt')
+            with open(dataset_path + '/train.txt', 'w') as f:
+                for i in train_files:
+                    f.write(i + "\n")
+            self.ui.le_train_path.setText(dataset_path + '/train.txt')
+            with open(dataset_path + '/val.txt', 'w') as f:
+                for i in val_files:
+                    f.write(i + "\n")
+            self.ui.le_val_path.setText(dataset_path + '/val.txt')
+            self.ui.le_classes_path.setText(dataset_path + '/classes.txt')
+        except:
+            QMessageBox.critical("Error", "Please check.")
+            return
         QMessageBox.information(self, "Suceess", "Split dataset sucess!\n"
                                                  "Train/Test/Val/Classes file will save in dataset path.")
 
